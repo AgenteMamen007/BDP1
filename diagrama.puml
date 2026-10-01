@@ -1,0 +1,103 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+entity "offices" as offices {
+  * **officecode** : varchar(10) [PK]
+  --
+  city : varchar(50)
+  phone : varchar(50)
+  addressline1 : varchar(50)
+  addressline2 : varchar(50)
+  state : varchar(50)
+  country : varchar(50)
+  postalcode : varchar(15)
+  territory : varchar(10)
+}
+
+entity "employees" as employees {
+  * **employeenumber** : integer [PK]
+  --
+  lastname : varchar(50)
+  firstname : varchar(50)
+  extension : varchar(10)
+  email : varchar(100)
+  officecode : varchar(10) [FK]
+  reportsto : integer [FK]
+  jobtitle : varchar(50)
+}
+
+entity "customers" as customers {
+  * **customernumber** : integer [PK]
+  --
+  customername : varchar(50)
+  contactlastname : varchar(50)
+  contactfirstname : varchar(50)
+  phone : varchar(50)
+  addressline1 : varchar(50)
+  addressline2 : varchar(50)
+  city : varchar(50)
+  state : varchar(50)
+  postalcode : varchar(15)
+  country : varchar(50)
+  salesrepemployeenumber : integer [FK]
+  creditlimit : numeric(10,2)
+}
+
+entity "orders" as orders {
+  * **ordernumber** : integer [PK]
+  --
+  orderdate : date
+  requireddate : date
+  shippeddate : date
+  status : varchar(15)
+  comments : text
+  customernumber : integer [FK]
+}
+
+entity "orderdetails" as orderdetails {
+  * **ordernumber** : integer [PK, FK]
+  * **productcode** : varchar(15) [PK, FK]
+  --
+  quantityordered : integer
+  priceeach : numeric(10,2)
+  orderlinenumber : smallint
+}
+
+entity "payments" as payments {
+  * **customernumber** : integer [PK, FK]
+  * **checknumber** : varchar(50) [PK]
+  --
+  paymentdate : date
+  amount : numeric(10,2)
+}
+
+entity "products" as products {
+  * **productcode** : varchar(15) [PK]
+  --
+  productname : varchar(70)
+  productline : varchar(50) [FK]
+  productscale : varchar(10)
+  productvendor : varchar(50)
+  productdescription : text
+  quantityinstock : smallint
+  buyprice : numeric(10,2)
+  msrp : numeric(10,2)
+}
+
+entity "productlines" as productlines {
+  * **productline** : varchar(50) [PK]
+  --
+  textdescription : varchar(4000)
+  htmldescription : varchar(4000)
+  image : varchar
+}
+
+employees --> offices : officecode
+employees --> employees : reportsto
+customers --> employees : salesrepemployeenumber
+orders --> customers : customernumber
+payments --> customers : customernumber
+orderdetails --> orders : ordernumber
+orderdetails --> products : productcode
+products --> productlines : productline
+@enduml
