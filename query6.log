@@ -1,0 +1,8 @@
+query6: Se desea un listado de todas las parejas de productos que aparezcan en más de un carro de la compra
+   id1    |    id2    | numero_carros 
+----------+-----------+---------------
+ S50_1341 | S700_1691 |            28
+ S24_2841 | S24_3420  |            27
+ S18_2319 | S18_3232  |            27
+(3 rows)
+
