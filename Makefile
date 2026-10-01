@@ -55,4 +55,5 @@ query6:
 	@echo query6: "Se desea un listado de todas las parejas de productos que aparezcan en más de un carro de la compra" | tee query6.log
 	@cat query6.sql | $(PSQL) | tee -a query6.log
 
-removelogs: rm -rf *.log
+removelogs:
+	rm -rf *.log
