@@ -1,3 +1,5 @@
+#http://www.dpriver.com/pp/sqlformat.htm : Formateador usado
+
 # Version 1.0
 # Por lo general no se requiere modificar el fichero
 
