@@ -57,5 +57,11 @@ query6:
 	@echo query6: "Se desea un listado de todas las parejas de productos que aparezcan en más de un carro de la compra" | tee query6.log
 	@cat query6.sql | $(PSQL) | tee -a query6.log
 
+nuevabase:
+	@echo "Recreando la base de datos con el nuevo diseño..."
+	@$(DROPDB) $(DBNAME)
+	@$(CREATEDB)
+	@cat nuevabase.sql | $(PSQL)
+
 removelogs:
 	rm -rf *.log
